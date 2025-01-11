@@ -94,6 +94,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
   AppBar _buildDesktopAppBar() {
     return AppBar(
       backgroundColor: Colors.white,

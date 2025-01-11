@@ -17,59 +17,58 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    // Define breakpoints
     final bool isDesktop = width > 1100;
     final bool isTablet = width > 600 && width <= 1100;
     final bool isMobile = width <= 600;
 
-    // Adjust paddings and spacing based on screen size
     final horizontalPadding = isMobile ? 20.0 : 40.0;
     final verticalPadding = isMobile ? 20.0 : 40.0;
 
-    // Font scaling for headings
     final headingFontSize = (width * 0.03).clamp(24.0, 32.0);
     final subHeadingFontSize = (width * 0.02).clamp(14.0, 16.0);
     final backGroundFontSize = (width * 0.1).clamp(14.0, 160.0);
 
     Widget content = isMobile
         ? SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildContactInfoSection(headingFontSize, subHeadingFontSize),
-                const SizedBox(height: 40),
-                _buildContactFormSection(context),
-              ],
-            ),
-          )
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildContactInfoSection(headingFontSize, subHeadingFontSize),
+          const SizedBox(height: 40),
+          _buildContactFormSection(context),
+        ],
+      ),
+    )
         : Padding(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(width: isDesktop ? 150 : 20),
-                Expanded(
-                  flex: isDesktop ? 1 : 1,
-                  child: _buildContactInfoSection(
-                      headingFontSize, subHeadingFontSize),
-                ),
-                SizedBox(width: isDesktop ? 50 : 20),
-                Expanded(
-                  flex: isDesktop ? 2 : 1,
-                  child: _buildContactFormSection(context),
-                ),
-                SizedBox(width: isDesktop ? 100 : 20),
-              ],
-            ),
-          );
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(width: isDesktop ? 150 : 20),
+          Expanded(
+            flex: isDesktop ? 1 : 1,
+            child: _buildContactInfoSection(
+                headingFontSize, subHeadingFontSize),
+          ),
+          SizedBox(width: isDesktop ? 50 : 20),
+          Expanded(
+            flex: isDesktop ? 2 : 1,
+            child: _buildContactFormSection(context),
+          ),
+          SizedBox(width: isDesktop ? 100 : 20),
+        ],
+      ),
+    );
 
     return Scaffold(
       backgroundColor: const Color(0xFF5840ba),
       body: Stack(
         children: [
           LargeBackgroundText(
-            text: 'Latest Projects',
+            text: 'Contact Me',
             top: 0,
             left: 0,
             fontSize: backGroundFontSize,
@@ -92,7 +91,7 @@ class _ContactScreenState extends State<ContactScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '— Contact Us',
+          '— Get In Touch',
           style: TextStyle(
             color: Colors.white.withOpacity(0.7),
             fontSize: subHeadingFontSize,
@@ -102,7 +101,7 @@ class _ContactScreenState extends State<ContactScreen> {
         const SizedBox(height: 10),
         RichText(
           text: TextSpan(
-            text: 'Let’s Connect & ',
+            text: 'Hi, I’m Mohammed Salah. ',
             style: TextStyle(
               color: Colors.white,
               fontSize: headingFontSize,
@@ -110,7 +109,7 @@ class _ContactScreenState extends State<ContactScreen> {
             ),
             children: const [
               TextSpan(
-                text: 'Collaborate',
+                text: 'Let’s collaborate!',
                 style: TextStyle(
                   color: Colors.lightGreenAccent,
                   fontWeight: FontWeight.bold,
@@ -121,21 +120,21 @@ class _ContactScreenState extends State<ContactScreen> {
         ),
         const SizedBox(height: 10),
         Text(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+          'Feel free to reach out through any of the methods below.',
           style: TextStyle(
             color: Colors.white70,
             fontSize: subHeadingFontSize,
           ),
         ),
         const SizedBox(height: 30),
-        _buildContactInfoItem(Icons.phone, '+1 (406) 555-0120'),
+        _buildContactInfoItem(Icons.phone, '+213 656 375 516'),
         const SizedBox(height: 20),
-        _buildContactInfoItem(Icons.email, 'example@gmail.com'),
+        _buildContactInfoItem(Icons.email, 'salahinetelecom@gmail.com'),
         const SizedBox(height: 20),
-        _buildContactInfoItem(Icons.web, 'example'),
+        _buildContactInfoItem(Icons.web, 'github.com/salahdine2020'),
         const SizedBox(height: 20),
         _buildContactInfoItem(
-            Icons.location_on, '2464 Royal Ln. Mesa, New Jersey 45463'),
+            Icons.location_on, 'Tlemcen, Algeria'),
       ],
     );
   }
@@ -156,42 +155,37 @@ class _ContactScreenState extends State<ContactScreen> {
           height: 1.4,
         ),
       ),
-      contentPadding: EdgeInsets.zero, // Remove padding if not needed
-      horizontalTitleGap: 15, // Adjust spacing between leading and title
+      contentPadding: EdgeInsets.zero,
+      horizontalTitleGap: 15,
     );
   }
 
   Widget _buildContactFormSection(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final spacing = width <= 600 ? 10.0 : 20.0;
-
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // First Name & Last Name
           Row(
             children: [
               Expanded(
                 child: _buildTextField(
                   label: 'First Name *',
                   validator: (value) =>
-                      value!.isEmpty ? 'Please enter first name' : null,
+                  value!.isEmpty ? 'Please enter first name' : null,
                 ),
               ),
-              SizedBox(width: spacing),
+              const SizedBox(width: 20),
               Expanded(
                 child: _buildTextField(
                   label: 'Last Name *',
                   validator: (value) =>
-                      value!.isEmpty ? 'Please enter last name' : null,
+                  value!.isEmpty ? 'Please enter last name' : null,
                 ),
               ),
             ],
           ),
-          SizedBox(height: spacing),
-          // Email & Phone
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -201,64 +195,52 @@ class _ContactScreenState extends State<ContactScreen> {
                   validator: (value) {
                     if (value!.isEmpty) return 'Please enter email';
                     final emailRegex =
-                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                     return !emailRegex.hasMatch(value)
                         ? 'Enter a valid email'
                         : null;
                   },
                 ),
               ),
-              SizedBox(width: spacing),
+              const SizedBox(width: 20),
               Expanded(
                 child: _buildTextField(
                   label: 'Phone Number *',
                   keyboardType: TextInputType.phone,
                   validator: (value) =>
-                      value!.isEmpty ? 'Please enter phone number' : null,
+                  value!.isEmpty ? 'Please enter phone number' : null,
                 ),
               ),
             ],
           ),
-          SizedBox(height: spacing),
-          // Subject
+          const SizedBox(height: 20),
           _buildTextField(
             label: 'Subject *',
             validator: (value) =>
-                value!.isEmpty ? 'Please enter subject' : null,
+            value!.isEmpty ? 'Please enter subject' : null,
           ),
-          SizedBox(height: spacing),
-          // Message
+          const SizedBox(height: 20),
           _buildTextField(
             label: 'Message *',
             maxLines: 5,
             validator: (value) =>
-                value!.isEmpty ? 'Please enter message' : null,
+            value!.isEmpty ? 'Please enter message' : null,
           ),
-          SizedBox(height: spacing),
-
-          // Send Button Row
-          MouseRegion(
-            onEnter: (_) => setState(() => _isHovered = true),
-            onExit: (_) => setState(() => _isHovered = false),
-            child: Row(
-              children: [
-                ElevatedButton.icon(
-                  onPressed: _submitForm,
-                  icon: const Icon(Icons.send, color: Colors.black),
-                  label: const Text(
-                    'Send Message',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightGreenAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                  ),
-                ),
-              ],
+          const SizedBox(height: 20),
+          ElevatedButton.icon(
+            onPressed: _submitForm,
+            icon: const Icon(Icons.send, color: Colors.black),
+            label: const Text(
+              'Send Message',
+              style: TextStyle(color: Colors.black),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.lightGreenAccent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             ),
           ),
         ],
@@ -279,24 +261,11 @@ class _ContactScreenState extends State<ContactScreen> {
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(color: Colors.white70),
-        errorStyle: TextStyle(color: Colors.greenAccent),
         filled: true,
         fillColor: Colors.white.withOpacity(0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.greenAccent, width: 2),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.greenAccent, width: 2),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.greenAccent, width: 2),
         ),
       ),
       style: const TextStyle(color: Colors.white),
@@ -305,11 +274,12 @@ class _ContactScreenState extends State<ContactScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Implement form submission logic
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Message Sent Successfully!',
-              style: TextStyle(color: Colors.black)),
+          content: const Text(
+            'Message Sent Successfully!',
+            style: TextStyle(color: Colors.black),
+          ),
           backgroundColor: Colors.greenAccent,
         ),
       );

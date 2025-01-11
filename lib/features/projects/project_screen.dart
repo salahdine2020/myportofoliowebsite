@@ -31,8 +31,14 @@ class ProjectScreen extends StatelessWidget {
           LayoutBuilder(
             builder: (context, constraints) {
               // Scale the background text size relative to screen width
-              double backgroundFontSize =
-                  (constraints.maxWidth * 0.1).clamp(40.0, 150.0);
+              double backgroundFontSize = (constraints.maxWidth * 0.1).clamp(40.0, 150.0);
+              return Text(
+                'Latest Projects',
+                style: TextStyle(
+                  fontSize: backgroundFontSize,
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              );
               return LargeBackgroundText(
                 text: 'Latest Projects',
                 top: 0,
@@ -44,127 +50,117 @@ class ProjectScreen extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: horizontalPadding, vertical: verticalPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
+            child: ListView(
               children: [
-                // Header Section
                 _buildSectionHeader(isDesktop, isTablet, isMobile),
                 const SizedBox(height: 30),
-                // Project Cards
-                Expanded(
-                  child: ListView(
-                    children: [
-                      _buildProjectCard(
-                        context,
-                        imagePath: 'assets/images/project5.png',
-                        title:
-                        'E-umma Islamia',
-                        description:
-                        'A comprehensive mobile application designed for Islamic practices, education, and spiritual guidance. '
-                            'The app features an intuitive interface for daily prayer times, a searchable guide to supplications, religious audio lessons, '
-                            'and interactive quizzes for Islamic learning. Users can also access an Islamic calendar, view important events, and track their spiritual progress. '
-                            'This user-friendly design enhances engagement and accessibility for a holistic spiritual experience.',
-                        tags: [
-                          'Mobile App Design',
-                          'UI/UX Design',
-                          'Religious App',
-                          'Islamic Education',
-                          'Spiritual Guidance',
-                          'Prayer Times',
-                          'Interactive Learning',
-                          'Faith-Based Tech'
-                        ],
-                        isImageLeft: true,
-                        isDesktop: isDesktop,
-                        isTablet: isTablet,
-                        isMobile: isMobile,
-                        playStoreLink: "https://play.google.com/store/apps/details?id=com.eummahislamia.eummahislamiaapp&hl=ar",
-                        appStoreLink: "https://apps.apple.com/fr/app/e-umma-islamia/id6503656498",
-                      ),
-                      const SizedBox(height: 20),
-                      _buildProjectCard(
-                        context,
-                        imagePath: 'assets/images/project1.png',
-                        title: 'Podcast - Podcast Mobile App Solution',
-                        description:
-                            """This project showcases a set of highly polished mobile applications built using Flutter. Each app features an exceptional UI/UX design, ensuring a seamless and engaging user experience. Key functionalities include user management, file organization, messaging, scheduling, and sports/team management. The apps integrate Firebase for real-time database and authentication, Google Maps for geolocation services, and advanced AI features for data-driven functionalities. Native code is utilized for enhanced performance and deeper device integration.""",
-                        tags: [
-                          'Flutter',
-                          'Firebase',
-                          'Google Maps',
-                          'AI Integration'
-                        ],
-                        isImageLeft: false,
-                        isDesktop: isDesktop,
-                        isTablet: isTablet,
-                        isMobile: isMobile,
-                      ),
-                      const SizedBox(height: 20),
-                      _buildProjectCard(
-                        context,
-                        imagePath: 'assets/images/project2.png',
-                        title: 'Futsal Management App',
-                        description: """This app is a complete sports management solution tailored for futsal enthusiasts. Built using Flutter, the app offers features like match scheduling, venue reservations, live updates, and an integrated e-commerce platform for purchasing sports gear. With an intuitive UI/UX design, it provides a smooth user experience. Firebase ensures real-time data synchronization, and Google Maps integration allows users to locate venues effortlessly.""",
-                        tags: [
-                          'Flutter',
-                          'Firebase',
-                          'Google Maps',
-                          'E-commerce'
-                        ],
-                        apkStoreLink: "https://drive.google.com/file/d/1LVuRR2iBkNbdPVoVtvKw8M5kKhJpIGeN/view",
-                        isImageLeft: true,
-                        isDesktop: isDesktop,
-                        isTablet: isTablet,
-                        isMobile: isMobile,
-                      ),
-                      const SizedBox(height: 20),
-                      _buildProjectCard(
-                        context,
-                        imagePath: 'assets/images/project3.png',
-                        title: 'Food Delivery & Restaurant Management App',
-                        description:
-                            """This app is a modern food delivery and restaurant management platform designed to enhance the dining experience. Built using Flutter, the app allows users to browse menus, place orders, and track deliveries in real-time. Restaurants can manage orders efficiently with features for table bookings and delivery tracking. Firebase provides secure authentication and real-time updates, while Google Maps facilitates navigation and restaurant discovery. The app's streamlined UI/UX ensures an effortless experience for both customers and businesses.""",
-                        tags: [
-                          'Flutter',
-                          'Firebase',
-                          'Google Maps',
-                          'Food Delivery'
-                        ],
-                        isImageLeft: false,
-                        isDesktop: isDesktop,
-                        isTablet: isTablet,
-                        isMobile: isMobile,
-                        githubStoreLink: "https://github.com/salahdine2020/grup/tree/develop",
-                      ),
-                      const SizedBox(height: 20),
-                      _buildProjectCard(
-                        context,
-                        imagePath: 'assets/images/project4.png',
-                        title: 'Mobile Wallet Application - User Flow Design',
-                        description:
-                            'A sleek and secure mobile wallet application designed for seamless onboarding, account setup, and cryptocurrency transactions. '
-                            'The user flow includes intuitive screens for PIN creation, password setup, secure wallet recovery, and transaction processes. '
-                            'The interface focuses on user experience, ensuring clarity and usability while guiding users through essential wallet security and payment functionalities.',
-                        tags: [
-                          'Mobile App Design',
-                          'UI/UX Design',
-                          'Cryptocurrency Wallet',
-                          'User Onboarding',
-                          'Digital Security',
-                          'FinTech',
-                          'Mobile Experience',
-                          'Secure Transactions'
-                        ],
-                        playStoreLink: "https://play.google.com/store/apps/details?id=com.tectone23.portofoli.ltd&pli=1",
-                        isImageLeft: true,
-                        isDesktop: isDesktop,
-                        isTablet: isTablet,
-                        isMobile: isMobile,
-                      ),
-                    ],
-                  ),
+                _buildProjectCard(
+                  context,
+                  imagePath: 'assets/images/project5.png',
+                  title:
+                  'E-umma Islamia',
+                  description:
+                  'A comprehensive mobile application designed for Islamic practices, education, and spiritual guidance. '
+                      'The app features an intuitive interface for daily prayer times, a searchable guide to supplications, religious audio lessons, '
+                      'and interactive quizzes for Islamic learning. Users can also access an Islamic calendar, view important events, and track their spiritual progress. '
+                      'This user-friendly design enhances engagement and accessibility for a holistic spiritual experience.',
+                  tags: [
+                    'Mobile App Design',
+                    'UI/UX Design',
+                    'Religious App',
+                    'Islamic Education',
+                    'Spiritual Guidance',
+                    'Prayer Times',
+                    'Interactive Learning',
+                    'Faith-Based Tech'
+                  ],
+                  isImageLeft: true,
+                  isDesktop: isDesktop,
+                  isTablet: isTablet,
+                  isMobile: isMobile,
+                  playStoreLink: "https://play.google.com/store/apps/details?id=com.eummahislamia.eummahislamiaapp&hl=ar",
+                  appStoreLink: "https://apps.apple.com/fr/app/e-umma-islamia/id6503656498",
+                ),
+                const SizedBox(height: 20),
+                _buildProjectCard(
+                  context,
+                  imagePath: 'assets/images/project1.png',
+                  title: 'Podcast - Podcast Mobile App Solution',
+                  description:
+                  """This project showcases a set of highly polished mobile applications built using Flutter. Each app features an exceptional UI/UX design, ensuring a seamless and engaging user experience. Key functionalities include user management, file organization, messaging, scheduling, and sports/team management. The apps integrate Firebase for real-time database and authentication, Google Maps for geolocation services, and advanced AI features for data-driven functionalities. Native code is utilized for enhanced performance and deeper device integration.""",
+                  tags: [
+                    'Flutter',
+                    'Firebase',
+                    'Google Maps',
+                    'AI Integration'
+                  ],
+                  isImageLeft: false,
+                  isDesktop: isDesktop,
+                  isTablet: isTablet,
+                  isMobile: isMobile,
+                ),
+                const SizedBox(height: 20),
+                _buildProjectCard(
+                  context,
+                  imagePath: 'assets/images/project2.png',
+                  title: 'Futsal Management App',
+                  description: """This app is a complete sports management solution tailored for futsal enthusiasts. Built using Flutter, the app offers features like match scheduling, venue reservations, live updates, and an integrated e-commerce platform for purchasing sports gear. With an intuitive UI/UX design, it provides a smooth user experience. Firebase ensures real-time data synchronization, and Google Maps integration allows users to locate venues effortlessly.""",
+                  tags: [
+                    'Flutter',
+                    'Firebase',
+                    'Google Maps',
+                    'E-commerce'
+                  ],
+                  apkStoreLink: "https://drive.google.com/file/d/1LVuRR2iBkNbdPVoVtvKw8M5kKhJpIGeN/view",
+                  isImageLeft: true,
+                  isDesktop: isDesktop,
+                  isTablet: isTablet,
+                  isMobile: isMobile,
+                ),
+                const SizedBox(height: 20),
+                _buildProjectCard(
+                  context,
+                  imagePath: 'assets/images/project3.png',
+                  title: 'Food Delivery & Restaurant Management App',
+                  description:
+                  """This app is a modern food delivery and restaurant management platform designed to enhance the dining experience. Built using Flutter, the app allows users to browse menus, place orders, and track deliveries in real-time. Restaurants can manage orders efficiently with features for table bookings and delivery tracking. Firebase provides secure authentication and real-time updates, while Google Maps facilitates navigation and restaurant discovery. The app's streamlined UI/UX ensures an effortless experience for both customers and businesses.""",
+                  tags: [
+                    'Flutter',
+                    'Firebase',
+                    'Google Maps',
+                    'Food Delivery'
+                  ],
+                  isImageLeft: false,
+                  isDesktop: isDesktop,
+                  isTablet: isTablet,
+                  isMobile: isMobile,
+                  githubStoreLink: "https://github.com/salahdine2020/grup/tree/develop",
+                ),
+                const SizedBox(height: 20),
+                _buildProjectCard(
+                  context,
+                  imagePath: 'assets/images/project4.png',
+                  title: 'Mobile Wallet Application - User Flow Design',
+                  description:
+                  'A sleek and secure mobile wallet application designed for seamless onboarding, account setup, and cryptocurrency transactions. '
+                      'The user flow includes intuitive screens for PIN creation, password setup, secure wallet recovery, and transaction processes. '
+                      'The interface focuses on user experience, ensuring clarity and usability while guiding users through essential wallet security and payment functionalities.',
+                  tags: [
+                    'Mobile App Design',
+                    'UI/UX Design',
+                    'Cryptocurrency Wallet',
+                    'User Onboarding',
+                    'Digital Security',
+                    'FinTech',
+                    'Mobile Experience',
+                    'Secure Transactions'
+                  ],
+                  playStoreLink: "https://play.google.com/store/apps/details?id=com.tectone23.portofoli.ltd&pli=1",
+                  isImageLeft: true,
+                  isDesktop: isDesktop,
+                  isTablet: isTablet,
+                  isMobile: isMobile,
                 ),
               ],
             ),
@@ -210,7 +206,14 @@ class ProjectScreen extends StatelessWidget {
             ),
             const Spacer(),
             // On smaller screens, let the button move below if needed
-            const CustomViewAllServicesButton(textButton: "View All Projects"),
+            CustomViewAllServicesButton(
+              textButton: "View All Projects",
+              buttonType: "viewallprojects",
+              onTap: () {
+                // Any additional behavior before/after launching PDF
+                print("Button tapped!");
+              },
+            ),
           ],
         ),
       ],

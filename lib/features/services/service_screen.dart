@@ -89,7 +89,14 @@ class _ServiceScreenState extends State<ServiceScreen> {
                       ),
                     ),
                     const Spacer(),
-                    const CustomViewAllServicesButton(textButton: "View All Services"),
+                    CustomViewAllServicesButton(
+                      textButton: "View All Services",
+                      buttonType: "viewsllservices",
+                      onTap: () {
+                        // Any additional behavior before/after launching PDF
+                        print("Button tapped!");
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: isMobile ? 30 : 50),

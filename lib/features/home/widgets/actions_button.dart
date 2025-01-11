@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ActionButtons extends StatelessWidget {
+  final VoidCallback onPortfolioPressed;
+  final VoidCallback onHireMePressed;
+
+  // Constructor to receive the callbacks
+  ActionButtons({
+    required this.onPortfolioPressed,
+    required this.onHireMePressed,
+  });
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -16,47 +25,13 @@ class ActionButtons extends StatelessWidget {
             _buildHireMeButton(buttonPadding, textFontSize),
           ],
         );
-        return constraints.maxWidth > 600 ? Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: Colors.grey.shade300, width: 2),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.deepPurpleAccent.withOpacity(0.4),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildPortfolioButton(buttonPadding, iconSize, textFontSize),
-              const SizedBox(width: 10),
-              _buildHireMeButton(buttonPadding, textFontSize),
-            ],
-          ),
-        ) :
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildPortfolioButton(buttonPadding, iconSize, textFontSize),
-            const SizedBox(width: 10),
-            _buildHireMeButton(buttonPadding, textFontSize),
-          ],
-        );
       },
     );
   }
 
   Widget _buildPortfolioButton(double buttonPadding, double iconSize, double textFontSize) {
     return ElevatedButton(
-      onPressed: () {
-        // Action for Portfolio button
-      },
+      onPressed: onPortfolioPressed, // Use the callback here
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.deepPurpleAccent,
         shape: RoundedRectangleBorder(
@@ -94,9 +69,7 @@ class ActionButtons extends StatelessWidget {
 
   Widget _buildHireMeButton(double buttonPadding, double textFontSize) {
     return OutlinedButton(
-      onPressed: () {
-        // Action for Hire Me button
-      },
+      onPressed: onHireMePressed, // Use the callback here
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),

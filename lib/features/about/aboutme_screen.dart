@@ -175,7 +175,15 @@ class AboutMeScreen extends StatelessWidget {
                   crossAxisAlignment: WrapCrossAlignment.center,
                   spacing: screenWidth * 0.02,
                   children: [
-                    const CustomViewAllServicesButton(textButton: "Download CV"),
+                    CustomViewAllServicesButton(
+                      textButton: "Download CV",
+                      buttonType: "downloadcv",
+                      onTap: () {
+                        // Any additional behavior before/after launching PDF
+                        print("Button tapped!");
+                      },
+                    ),
+
                     Text(
                       'Mohammed Salah',
                       style: TextStyle(
@@ -301,7 +309,14 @@ class AboutMeScreen extends StatelessWidget {
               SizedBox(height: screenHeight * 0.03),
               Row(
                 children: [
-                  const CustomViewAllServicesButton(textButton: "Download CV"),
+                  CustomViewAllServicesButton(
+                    textButton: "Download CV",
+                    buttonType: "downloadcv",
+                    onTap: () {
+                      // Any additional behavior before/after launching PDF
+                      print("Button tapped!");
+                    },
+                  ),
                   SizedBox(width: screenWidth * 0.01),
                   Text(
                     'Mohammed Salah',

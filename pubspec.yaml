@@ -39,6 +39,8 @@ dependencies:
   animated_text_kit:
   marquee: ^2.3.0
   url_launcher:
+  firebase_core:
+  font_awesome_flutter:
 
 dev_dependencies:
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:marquee/marquee.dart';
 import 'package:myportofolio/core/utils/icons.dart';
 import 'package:myportofolio/features/home/widgets/actions_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/widgets/animatedservices_widget.dart';
 import '../../../core/widgets/responsive_widget.dart';
 import '../../about/aboutme_screen.dart';
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: isMobile ? _buildMobileAppBar(context) : _buildDesktopAppBar(),
-      drawer: isMobile ? _buildDrawer() : null,
+      drawer: isMobile ? _buildDrawer(context) : null,
       body: PageView(
         controller: _pageController,
         scrollDirection: Axis.vertical,
@@ -103,9 +105,9 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CircleAvatar(
-                  radius: 20,
+                  radius: constraints.maxWidth * .01,
                   child: Image.asset(
-                    'assets/images/test_im.jpg',
+                    'assets/images/myimage.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -189,55 +191,117 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Drawer _buildDrawer() {
+
+  Drawer _buildDrawer(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.deepPurpleAccent,
-            ),
-            child: Text(
-              'Mohammed Salah',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
+      child: SafeArea(
+        child: Container(
+          width: MediaQuery.of(context).size.width, // Make the drawer full width
+          color: Colors.black87, // Background color
+          child: Column(
+            children: [
+              // Close button
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
               ),
-            ),
+
+              // Menu Items
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                  children: [
+                    _buildDrawerItem(
+                      icon: Icons.home_outlined,
+                      title: 'Home',
+                      isSelected: _selectedPage == 0,
+                      onTap: () => scrollToPage(0),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.design_services_outlined,
+                      title: 'Services',
+                      isSelected: _selectedPage == 1,
+                      onTap: () => scrollToPage(1),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.person_outline,
+                      title: 'About',
+                      isSelected: _selectedPage == 2,
+                      onTap: () => scrollToPage(2),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.work_outline,
+                      title: 'Projects',
+                      isSelected: _selectedPage == 3,
+                      onTap: () => scrollToPage(3),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.attach_money,
+                      title: 'Pricing',
+                      isSelected: _selectedPage == 4,
+                      onTap: () => scrollToPage(4),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.article_outlined,
+                      title: 'Blog',
+                      isSelected: _selectedPage == 5,
+                      onTap: () => scrollToPage(5),
+                    ),
+                    _buildDrawerItem(
+                      icon: Icons.contact_mail_outlined,
+                      title: 'Contact',
+                      isSelected: _selectedPage == 6,
+                      onTap: () => scrollToPage(6),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          ListTile(
-            title: const Text('Home'),
-            onTap: () => scrollToPage(0),
-          ),
-          ListTile(
-            title: const Text('Services'),
-            onTap: () => scrollToPage(1),
-          ),
-          ListTile(
-            title: const Text('About'),
-            onTap: () => scrollToPage(2),
-          ),
-          ListTile(
-            title: const Text('Projects'),
-            onTap: () => scrollToPage(3),
-          ),
-          ListTile(
-            title: const Text('Pricing'),
-            onTap: () => scrollToPage(4),
-          ),
-          ListTile(
-            title: const Text('Blog'),
-            onTap: () => scrollToPage(5),
-          ),
-          ListTile(
-            title: const Text('Contact'),
-            onTap: () => scrollToPage(6),
-          ),
-        ],
+        ),
       ),
     );
   }
+
+  Widget _buildDrawerItem({
+    required IconData icon,
+    required String title,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: isSelected ? Colors.white : Colors.white70,
+          size: 28,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.white70,
+            fontSize: 18,
+            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+          ),
+        ),
+        onTap: () {
+          onTap();
+          Navigator.pop(context);
+        },
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        hoverColor: Colors.white.withOpacity(0.1),
+      ),
+    );
+  }
+
+
 
   Widget _buildHomeSection(BuildContext context, bool isMobile) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -245,8 +309,8 @@ class _HomePageState extends State<HomePage> {
 
     return Stack(
       children: [
-        // Instead of constraining the entire content with maxWidth here,
-        // only constrain the hero section and image, not the marquee.
+        // Social Media Links on the left
+
         SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -257,29 +321,200 @@ class _HomePageState extends State<HomePage> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  'assets/images/test_im.jpg',
-                  height: screenHeight * 0.3,
+                  'assets/images/myimage.jpg',
+                  height: screenHeight * 0.5,
                   fit: BoxFit.cover,
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
-              ActionButtons(),
-              SizedBox(height: screenHeight * (isMobile ? 0.285 : 0.255)),
-              // Place the marquee section here, not wrapped by a width-constrained Container
+              ActionButtons(
+                onHireMePressed: () => scrollToPage(6),
+                onPortfolioPressed: () => scrollToPage(4),
+              ),
+              if (isMobile)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: _buildSocialMediaLinksHorizontal(),
+                ),
+              SizedBox(height: screenHeight * (isMobile ? 0.15 : 0.06)),
               _buildFullWidthMarquee(context),
             ],
           ),
         ),
-        // Positioning the HappyClientsWidget at the bottom center is fine as is.
-        Positioned(
-          bottom: screenHeight * 0.3,
-          left: screenWidth * 0.1,
-          right: screenWidth * 0.5,
-          child: Center(
-            child: isMobile ? const SizedBox() : const HappyClientsWidget(),
+
+        if (!isMobile)
+          Positioned(
+            left: 20,
+            top: screenHeight * 0.3,
+            child: _buildSocialMediaLinks(),
+          ),
+      ],
+    );
+  }
+
+
+  Widget _buildSocialMediaLinksHorizontal() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: _buildSocialButtons(isVertical: false),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildSocialButtons({required bool isVertical}) {
+    final socialLinks = [
+      (FontAwesomeIcons.linkedin, const Color(0xFF0077B5), 'https://www.linkedin.com/in/mohammed-salah-tighezza-743462142/'),
+      (FontAwesomeIcons.facebook, const Color(0xFF1877F2), 'https://www.facebook.com/med.salah.7355'),
+      (FontAwesomeIcons.whatsapp, const Color(0xFF25D366), 'https://wa.me/213656375516'),
+      (FontAwesomeIcons.github, Colors.black54, 'https://github.com/salahdine2020'),
+      (FontAwesomeIcons.x, Colors.black54, 'https://x.com/salahmoham83702?s=21'),
+    ];
+
+    return socialLinks.map((social) {
+      final button = _buildSocialButton(
+        icon: social.$1,
+        color: social.$2,
+        onTap: () => _launchURL(social.$3),
+      );
+
+      if (isVertical) {
+        return Column(
+          children: [
+            button,
+            const SizedBox(height: 20),
+          ],
+        );
+      } else {
+        return Row(
+          children: [
+            button,
+            const SizedBox(width: 20),
+          ],
+        );
+      }
+    }).toList();
+  }
+
+  Future<void> _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $urlString';
+      }
+    } catch (e) {
+      debugPrint('Error launching URL: $e');
+      // Optionally show a snackbar to inform the user
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Could not open link: $urlString'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  Widget _buildSocialButton({
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: () {
+          //print("start taping to launch url ...");
+          onTap();
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: color.withOpacity(0.2),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: FaIcon(
+            icon,
+            color: color,
+            size: 24,
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildSocialMediaLinks() {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          _buildSocialButton(
+            icon: FontAwesomeIcons.linkedin,
+            color: const Color(0xFF0077B5),
+            onTap: () => _launchURL('https://www.linkedin.com/in/mohammed-salah-tighezza-743462142/'),
+          ),
+          const SizedBox(height: 20),
+          _buildSocialButton(
+            icon: FontAwesomeIcons.facebook,
+            color: const Color(0xFF1877F2),
+            onTap: () => _launchURL('https://www.facebook.com/med.salah.7355'),
+          ),
+          const SizedBox(height: 20),
+          _buildSocialButton(
+            icon: FontAwesomeIcons.whatsapp,
+            color: const Color(0xFF25D366),
+            onTap: () => _launchURL('https://wa.me/213656375516')
+          ),
+          const SizedBox(height: 20),
+          _buildSocialButton(
+            icon: FontAwesomeIcons.github,
+            color: Colors.black54,
+            onTap: () => _launchURL('https://github.com/salahdine2020'),
+          ),
+          const SizedBox(height: 20),
+          _buildSocialButton(
+            icon: FontAwesomeIcons.x,
+            color: Colors.black54,
+            onTap: () => _launchURL('https://x.com/salahmoham83702?s=21'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -292,7 +527,7 @@ class _HomePageState extends State<HomePage> {
       child: SizedBox(
         height: 30,
         child: Marquee(
-          text: '    Web Design    ✦    App Design    ✦    Dashboard    ✦    Wireframe    ✦    User Research    ',
+          text: '    Flutter Development    ✦    Cross-Platform Apps    ✦    UI/UX Design    ✦    State Management    ✦    Firebase Integration    ',
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -354,7 +589,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildPricingSection(BuildContext context) {
-    return const PricingScreen();
+    return PricingScreen(onGetStarted: ()=> scrollToPage(6));
   }
 
   Widget _buildContactSection(BuildContext context) {

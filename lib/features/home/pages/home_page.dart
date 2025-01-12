@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   final ValueNotifier<int> _selectedPageNotifier = ValueNotifier<int>(0);
   int _selectedPage = 0;
+  String myImage = "https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/myimage.jpg";
 
   // Scroll to a given page (vertical paging)
   void scrollToPage(int page) {
@@ -107,9 +109,11 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(8.0),
                 child: CircleAvatar(
                   radius: constraints.maxWidth * .01,
-                  child: Image.asset(
-                    'assets/images/myimage.jpg',
-                    fit: BoxFit.cover,
+                  child:  CachedNetworkImage(
+                    imageUrl: myImage,
+                    fit: BoxFit.cover, // Ensures the image covers the box
+                    placeholder: (context, url) => const SizedBox(), // Placeholder while loading
+                    errorWidget: (context, url, error) => const Icon(Icons.error), // Error widget if image fails to load
                   ),
                 ),
               ),
@@ -321,10 +325,13 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: screenHeight * 0.02),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'assets/images/myimage.jpg',
+                child:
+                CachedNetworkImage(
+                  imageUrl: myImage,
                   height: screenHeight * 0.5,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.cover, // Ensures the image covers the box
+                  placeholder: (context, url) => const SizedBox(), // Placeholder while loading
+                  errorWidget: (context, url, error) => const Icon(Icons.error), // Error widget if image fails to load
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
@@ -586,7 +593,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBlogsSection(BuildContext context) {
-    return const BlogScreen();
+    return BlogScreen();
   }
 
   Widget _buildPricingSection(BuildContext context) {

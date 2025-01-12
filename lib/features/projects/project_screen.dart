@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/widgets/backgroundtext.dart';
@@ -31,7 +32,8 @@ class ProjectScreen extends StatelessWidget {
           LayoutBuilder(
             builder: (context, constraints) {
               // Scale the background text size relative to screen width
-              double backgroundFontSize = (constraints.maxWidth * 0.1).clamp(40.0, 150.0);
+              double backgroundFontSize =
+                  (constraints.maxWidth * 0.1).clamp(40.0, 150.0);
               return Text(
                 'Latest Projects',
                 style: TextStyle(
@@ -50,18 +52,19 @@ class ProjectScreen extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
+            padding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding, vertical: verticalPadding),
             child: ListView(
               children: [
                 _buildSectionHeader(isDesktop, isTablet, isMobile),
                 const SizedBox(height: 30),
                 _buildProjectCard(
                   context,
-                  imagePath: 'assets/images/project5.png',
-                  title:
-                  'E-umma Islamia',
+                  imagePath:
+                      'https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/project5.png',
+                  title: 'E-umma Islamia',
                   description:
-                  'A comprehensive mobile application designed for Islamic practices, education, and spiritual guidance. '
+                      'A comprehensive mobile application designed for Islamic practices, education, and spiritual guidance. '
                       'The app features an intuitive interface for daily prayer times, a searchable guide to supplications, religious audio lessons, '
                       'and interactive quizzes for Islamic learning. Users can also access an Islamic calendar, view important events, and track their spiritual progress. '
                       'This user-friendly design enhances engagement and accessibility for a holistic spiritual experience.',
@@ -73,22 +76,25 @@ class ProjectScreen extends StatelessWidget {
                     'Spiritual Guidance',
                     'Prayer Times',
                     'Interactive Learning',
-                    'Faith-Based Tech'
+                    'Faith-Based Tech',
                   ],
                   isImageLeft: true,
                   isDesktop: isDesktop,
                   isTablet: isTablet,
                   isMobile: isMobile,
-                  playStoreLink: "https://play.google.com/store/apps/details?id=com.eummahislamia.eummahislamiaapp&hl=ar",
-                  appStoreLink: "https://apps.apple.com/fr/app/e-umma-islamia/id6503656498",
+                  playStoreLink:
+                      "https://play.google.com/store/apps/details?id=com.eummahislamia.eummahislamiaapp&hl=ar",
+                  appStoreLink:
+                      "https://apps.apple.com/fr/app/e-umma-islamia/id6503656498",
                 ),
                 const SizedBox(height: 20),
                 _buildProjectCard(
                   context,
-                  imagePath: 'assets/images/project1.png',
+                  imagePath:
+                      'https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/project1.png',
                   title: 'Podcast - Podcast Mobile App Solution',
                   description:
-                  """This project showcases a set of highly polished mobile applications built using Flutter. Each app features an exceptional UI/UX design, ensuring a seamless and engaging user experience. Key functionalities include user management, file organization, messaging, scheduling, and sports/team management. The apps integrate Firebase for real-time database and authentication, Google Maps for geolocation services, and advanced AI features for data-driven functionalities. Native code is utilized for enhanced performance and deeper device integration.""",
+                      """This project showcases a set of highly polished mobile applications built using Flutter. Each app features an exceptional UI/UX design, ensuring a seamless and engaging user experience. Key functionalities include user management, file organization, messaging, scheduling, and sports/team management. The apps integrate Firebase for real-time database and authentication, Google Maps for geolocation services, and advanced AI features for data-driven functionalities. Native code is utilized for enhanced performance and deeper device integration.""",
                   tags: [
                     'Flutter',
                     'Firebase',
@@ -103,16 +109,14 @@ class ProjectScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildProjectCard(
                   context,
-                  imagePath: 'assets/images/project2.png',
+                  imagePath:
+                      'https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/project2.png',
                   title: 'Futsal Management App',
-                  description: """This app is a complete sports management solution tailored for futsal enthusiasts. Built using Flutter, the app offers features like match scheduling, venue reservations, live updates, and an integrated e-commerce platform for purchasing sports gear. With an intuitive UI/UX design, it provides a smooth user experience. Firebase ensures real-time data synchronization, and Google Maps integration allows users to locate venues effortlessly.""",
-                  tags: [
-                    'Flutter',
-                    'Firebase',
-                    'Google Maps',
-                    'E-commerce'
-                  ],
-                  apkStoreLink: "https://drive.google.com/file/d/1LVuRR2iBkNbdPVoVtvKw8M5kKhJpIGeN/view",
+                  description:
+                      """This app is a complete sports management solution tailored for futsal enthusiasts. Built using Flutter, the app offers features like match scheduling, venue reservations, live updates, and an integrated e-commerce platform for purchasing sports gear. With an intuitive UI/UX design, it provides a smooth user experience. Firebase ensures real-time data synchronization, and Google Maps integration allows users to locate venues effortlessly.""",
+                  tags: ['Flutter', 'Firebase', 'Google Maps', 'E-commerce'],
+                  apkStoreLink:
+                      "https://drive.google.com/file/d/1LVuRR2iBkNbdPVoVtvKw8M5kKhJpIGeN/view",
                   isImageLeft: true,
                   isDesktop: isDesktop,
                   isTablet: isTablet,
@@ -121,29 +125,27 @@ class ProjectScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildProjectCard(
                   context,
-                  imagePath: 'assets/images/project3.png',
+                  imagePath:
+                      'https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/project3.png',
                   title: 'Food Delivery & Restaurant Management App',
                   description:
-                  """This app is a modern food delivery and restaurant management platform designed to enhance the dining experience. Built using Flutter, the app allows users to browse menus, place orders, and track deliveries in real-time. Restaurants can manage orders efficiently with features for table bookings and delivery tracking. Firebase provides secure authentication and real-time updates, while Google Maps facilitates navigation and restaurant discovery. The app's streamlined UI/UX ensures an effortless experience for both customers and businesses.""",
-                  tags: [
-                    'Flutter',
-                    'Firebase',
-                    'Google Maps',
-                    'Food Delivery'
-                  ],
+                      """This app is a modern food delivery and restaurant management platform designed to enhance the dining experience. Built using Flutter, the app allows users to browse menus, place orders, and track deliveries in real-time. Restaurants can manage orders efficiently with features for table bookings and delivery tracking. Firebase provides secure authentication and real-time updates, while Google Maps facilitates navigation and restaurant discovery. The app's streamlined UI/UX ensures an effortless experience for both customers and businesses.""",
+                  tags: ['Flutter', 'Firebase', 'Google Maps', 'Food Delivery'],
                   isImageLeft: false,
                   isDesktop: isDesktop,
                   isTablet: isTablet,
                   isMobile: isMobile,
-                  githubStoreLink: "https://github.com/salahdine2020/grup/tree/develop",
+                  githubStoreLink:
+                      "https://github.com/salahdine2020/grup/tree/develop",
                 ),
                 const SizedBox(height: 20),
                 _buildProjectCard(
                   context,
-                  imagePath: 'assets/images/project4.png',
+                  imagePath:
+                      'https://raw.githubusercontent.com/salahdine2020/myportofoliowebsite/webv/assets/assets/images/project4.png',
                   title: 'Mobile Wallet Application - User Flow Design',
                   description:
-                  'A sleek and secure mobile wallet application designed for seamless onboarding, account setup, and cryptocurrency transactions. '
+                      'A sleek and secure mobile wallet application designed for seamless onboarding, account setup, and cryptocurrency transactions. '
                       'The user flow includes intuitive screens for PIN creation, password setup, secure wallet recovery, and transaction processes. '
                       'The interface focuses on user experience, ensuring clarity and usability while guiding users through essential wallet security and payment functionalities.',
                   tags: [
@@ -154,9 +156,10 @@ class ProjectScreen extends StatelessWidget {
                     'Digital Security',
                     'FinTech',
                     'Mobile Experience',
-                    'Secure Transactions'
+                    'Secure Transactions',
                   ],
-                  playStoreLink: "https://play.google.com/store/apps/details?id=com.tectone23.portofoli.ltd&pli=1",
+                  playStoreLink:
+                      "https://play.google.com/store/apps/details?id=com.tectone23.portofoli.ltd&pli=1",
                   isImageLeft: true,
                   isDesktop: isDesktop,
                   isTablet: isTablet,
@@ -232,9 +235,8 @@ class ProjectScreen extends StatelessWidget {
     required bool isMobile,
     String playStoreLink = "",
     appStoreLink = "",
-    apkStoreLink= "",
-    githubStoreLink= "",
-
+    apkStoreLink = "",
+    githubStoreLink = "",
   }) {
     double cardPadding = isMobile ? 10 : 20;
     double titleFontSize = isMobile ? 20 : 28;
@@ -313,11 +315,10 @@ class ProjectScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildImageSection(
-      String imagePath, double imageWidth, double imageHeight) {
+  Widget _buildImageSection(String imagePath, double imageWidth, double imageHeight) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
-      child: Image.asset(
+      child: Image.network(
         imagePath,
         height: imageHeight,
         width: imageWidth,
@@ -327,17 +328,17 @@ class ProjectScreen extends StatelessWidget {
   }
 
   Widget _buildTextSection(
-      String title,
-      String description,
-      List<String> tags,
-      double titleFontSize,
-      double descFontSize,
-      bool isMobile, {
-        String playStoreLink = "",
-        String appStoreLink = "",
-        String apkStoreLink = "",
-        String githubStoreLink = "",
-      }) {
+    String title,
+    String description,
+    List<String> tags,
+    double titleFontSize,
+    double descFontSize,
+    bool isMobile, {
+    String playStoreLink = "",
+    String appStoreLink = "",
+    String apkStoreLink = "",
+    String githubStoreLink = "",
+  }) {
     // Function to launch URLs
     Future<void> _launchURL(String url) async {
       try {
@@ -359,21 +360,22 @@ class ProjectScreen extends StatelessWidget {
           children: tags
               .map(
                 (tag) => Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: const Color(0xFFaeef6a),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                tag,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: isMobile ? 14 : 18,
-                  fontWeight: FontWeight.bold,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFaeef6a),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    tag,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: isMobile ? 14 : 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
+              )
               .toList(),
         ),
         const SizedBox(height: 15),
@@ -405,31 +407,31 @@ class ProjectScreen extends StatelessWidget {
             playStoreLink.isEmpty
                 ? const SizedBox()
                 : _buildPlatformButton(
-              icon: Icons.android,
-              label: 'Android',
-              onTap: () => _launchURL(playStoreLink),
-            ),
+                    icon: Icons.android,
+                    label: 'Android',
+                    onTap: () => _launchURL(playStoreLink),
+                  ),
             appStoreLink.isEmpty
                 ? const SizedBox()
                 : _buildPlatformButton(
-              icon: Icons.apple,
-              label: 'iOS',
-              onTap: () => _launchURL(appStoreLink),
-            ),
+                    icon: Icons.apple,
+                    label: 'iOS',
+                    onTap: () => _launchURL(appStoreLink),
+                  ),
             githubStoreLink.isEmpty
                 ? const SizedBox()
                 : _buildPlatformButton(
-              icon: Icons.code,
-              label: 'GitHub',
-              onTap: () => _launchURL(githubStoreLink),
-            ),
+                    icon: Icons.code,
+                    label: 'GitHub',
+                    onTap: () => _launchURL(githubStoreLink),
+                  ),
             apkStoreLink.isEmpty
                 ? const SizedBox()
                 : _buildPlatformButton(
-              icon: Icons.download,
-              label: 'APK',
-              onTap: () => _launchURL(apkStoreLink),
-            ),
+                    icon: Icons.download,
+                    label: 'APK',
+                    onTap: () => _launchURL(apkStoreLink),
+                  ),
           ],
         ),
       ],
